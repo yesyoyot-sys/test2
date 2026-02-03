@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>狼人殺法官</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #d32f2f; /* 狼人紅 */
+            --primary-color: #1976d2; /* 好人藍 */
+            --card-bg: #1e1e1e;
+            --highlight: #ffd700;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            margin: 0; padding: 0;
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh;
+            user-select: none;
+            overflow-x: hidden;
+        }
+
+        /* 通用元件 */
+        .screen { display: none; width: 100%; max-width: 600px; padding: 20px; box-sizing: border-box; flex-direction: column; align-items: center; }
+        .active { display: flex; }
+        
+        h1 { font-size: 2.5rem; letter-spacing: 3px; text-shadow: 0 0 10px var(--accent-color); margin: 20px 0; }
+        h2 { border-bottom: 2px solid #333; width: 100%; text-align: center; padding-bottom: 10px; margin-bottom: 20px; }
+        
+        .btn-main {
+            padding: 15px 0; width: 80%; font-size: 1.2rem;
+            background: linear-gradient(45deg, #cc2b5e, #753a88);
+            color: white; border: none; border-radius: 50px;
+            cursor: pointer; margin-top: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.2s;
+        }
+        .btn-main:active { transform: scale(0.95); }
+        .btn-secondary { background: #444; margin-top: 10px; font-size: 1rem; padding: 10px 20px; width: auto; }
+
+        /* 格子系統 */
+        .grid-container {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%;
+        }
+        .grid-btn {
+            aspect-ratio: 1; background: #333; border: 2px solid #555; border-radius: 10px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.5rem; font-weight: bold; cursor: pointer; position: relative;
+        }
+        .grid-btn.selected { background: var(--accent-color); border-color: white; color: white; }
+        .grid-btn.dead { opacity: 0.3; pointer-events: none; background: #000; text-decoration: line-through; }
+        .grid-btn .badge {
+            position: absolute; top: -5px; right: -5px; font-size: 0.7rem; 
+            background: var(--primary-color); padding: 2px 5px; border-radius: 5px;
+        }
+
+        /* 角色設定列表 */
+        .role-list { width: 100%; max-height: 50vh; overflow-y: auto; background: #1a1a1a; padding: 10px; border-radius: 10px; }
+        .role-row { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #333; }
+        .counter { display: flex; gap: 10px; align-items: center; }
+        .c-btn { width: 30px; height: 30px; background: #444; border-radius: 50%; text-align: center; line-height: 30px; }
+
+        /* 彈窗與覆蓋層 */
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: black; z-index: 100;
+            display: none; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 20px;
+        }
+        .role-card {
+            background: #222; border: 2px solid #666; padding: 30px; border-radius: 15px; width: 80%;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+        .info-text { font-size: 1.2rem; margin: 20px 0; line-height: 1.5; color: #ccc; }
+        .action-area { width: 100%; margin-top: 20px; }
+        
+        /* 狀態標籤 */
+        .tag { padding: 3px 8px; border-radius: 4px; font-size: 0.8rem; margin-right: 5px; }
+        .tag-wolf { background: #d32f2f; color: white; }
+        .tag-god { background: #fbc02d; color: black; }
+        .tag-villager { background: #1976d2; color: white; }
+
+        /* 動畫 */
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        .blink { animation: pulse 2s infinite; }
+    </style>
+</head>
+<body>
+
+    <div id="screen-home" class="screen active" onclick="app.goToSetup()">
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+            <h1>狼人殺</h1>
+            <div class="blink" style="color:#888; margin-top:20px;">點擊任意位置開始</div>
+        </div>
+    </div>
+
+    <div id="screen-setup" class="screen">
+        <h2>遊戲配置</h2>
+        <div style="display:flex; justify-content:space-between; width:100%; margin-bottom:10px;">
+            <span>總人數: <b id="total-display" style="font-size:1.5rem">10</b></span>
+            <div class="counter">
+                <div class="c-btn" onclick="app.adjustTotal(-1)">-</div>
+                <div class="c-btn" onclick="app.adjustTotal(1)">+</div>
+            </div>
+        </div>
+        
+        <div class="role-list" id="role-list-container">
+            </div>
+
+        <div id="setup-status" style="margin:10px 0; color:#888;">正在配置...</div>
+        <button id="btn-setup-done" class="btn-main" style="opacity:0.5; pointer-events:none;" onclick="app.finishSetup()">配置完成</button>
+    </div>
+
+    <div id="screen-reveal" class="screen">
+        <h2>身分發放</h2>
+        <p style="color:#888;">請玩家依序點擊查看身分</p>
+        <div id="reveal-grid" class="grid-container"></div>
+        <button id="btn-start-game" class="btn-main hidden" onclick="app.startGameLoop()">進入天黑</button>
+    </div>
+
+    <div id="screen-game" class="screen">
+        <h2 id="game-phase-title">天黑請閉眼</h2>
+        <div id="game-instruction" class="info-text">請將手機傳給...</div>
+        
+        <div id="game-action-area" class="action-area">
+            </div>
+
+        <button id="btn-action-confirm" class="btn-main" onclick="gameEngine.nextStep()">確認 / 下一步</button>
+    </div>
+
+    <div id="overlay-reveal" class="overlay" onclick="this.style.display='none'">
+        <div class="role-card">
+            <h2 id="card-name">角色名</h2>
+            <div id="card-camp" class="tag">陣營</div>
+            <p id="card-desc" style="text-align:left; margin-top:15px; color:#ddd;">說明</p>
+            <div style="margin-top:30px; font-size:0.9rem; color:#666;">點擊關閉</div>
+        </div>
+    </div>
+
+    <script>
+        // ================= 資料庫 =================
+        const ROLES = {
+            // 狼人
+            werewolf: { name: "狼人", camp: "wolf", type: "wolf", desc: "每晚與隊友討論並擊殺一名玩家。" },
+            wolf_king: { name: "黑狼王", camp: "wolf", type: "wolf", desc: "出局可帶走一人，被毒死不可發動。" },
+            white_wolf: { name: "白狼王", camp: "wolf", type: "wolf", desc: "白天可自爆帶走一人。" },
+            wolf_beauty: { name: "狼美人", camp: "wolf", type: "wolf", desc: "每晚魅惑一人，死時帶走該人。" },
+            gargoyle: { name: "石像鬼", camp: "wolf", type: "wolf", desc: "查驗具體身分。隊友死光才可刀人。" },
+            snow_wolf: { name: "雪狼", camp: "wolf", type: "wolf", desc: "被預言家查驗顯示為好人。" },
+            mech_wolf: { name: "機械狼", camp: "wolf", type: "wolf", desc: "首夜學習技能。" },
+            nightmare: { name: "夢魘", camp: "wolf", type: "wolf", desc: "每晚恐懼一人使技能失效。" },
+            // 神職
+            seer: { name: "預言家", camp: "god", type: "god", desc: "每晚查驗一人陣營。" },
+            witch: { name: "女巫", camp: "god", type: "god", desc: "解藥救人，毒藥殺人。一晚一藥。" },
+            hunter: { name: "獵人", camp: "god", type: "god", desc: "出局開槍。被毒/夢死不可開。" },
+            guard: { name: "守衛", camp: "god", type: "god", desc: "每晚守一人，不可連守。同守同救死。" },
+            knight: { name: "騎士", camp: "god", type: "god", desc: "白天決鬥。狼死或自死。" },
+            idiot: { name: "白痴", camp: "god", type: "god", desc: "被投翻牌免死。" },
+            dreamer: { name: "攝夢人", camp: "god", type: "god", desc: "攝夢免疫刀毒。連攝兩晚或攝夢死則目標死。" },
+            merchant: { name: "黑市商人", camp: "god", type: "god", desc: "首夜送技能。" },
+            magician: { name: "魔術師", camp: "god", type: "god", desc: "交換兩人號碼。" },
+            medium: { name: "通靈師", camp: "god", type: "god", desc: "查驗具體身分。" },
+            grave_keeper: { name: "守墓人", camp: "god", type: "god", desc: "知曉白天出局者陣營。" },
+            hunter_evil: { name: "獵魔人", camp: "god", type: "god", desc: "夜間狩獵，狼死或自死。" },
+            // 平民
+            villager: { name: "平民", camp: "human", type: "human", desc: "無技能，用邏輯投票。" },
+            // 特殊
+            cupid: { name: "邱比特", camp: "other", type: "god", desc: "連情侶。" },
+            thief: { name: "盜賊", camp: "other", type: "god", desc: "選牌。" }
+        };
+
+        // 預設配置
+        let config = {
+            total: 10,
+            counts: { werewolf: 3, villager: 4, seer: 1, witch: 1, hunter: 1 }
+        };
+
+        // 遊戲狀態
+        let gameState = {
+            players: [], // {id, roleKey, status: 'alive'|'dead', isWolf}
+            step: 0,     // 當前步驟
+            nightCount: 0,
+            deathList: [],
+            actions: {}  // 儲存當晚動作 { wolfKill: 1, witchSave: true, etc. }
+        };
+
+        // ================= 應用程式控制 =================
+        const app = {
+            showScreen: (id) => {
+                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+                document.getElementById(id).classList.add('active');
+            },
+            
+            goToSetup: () => {
+                app.renderRoleSetup();
+                app.updateCheck();
+                app.showScreen('screen-setup');
+            },
+
+            adjustTotal: (delta) => {
+                if (config.total + delta < 5) return;
+                config.total += delta;
+                document.getElementById('total-display').innerText = config.total;
+                app.updateCheck();
+            },
+
+            adjustRole: (key, delta) => {
+                if (!config.counts[key]) config.counts[key] = 0;
+                if (config.counts[key] + delta < 0) return;
+                config.counts[key] += delta;
+                document.getElementById(`count-${key}`).innerText = config.counts[key];
+                app.updateCheck();
+            },
+
+            updateCheck: () => {
+                let sum = Object.values(config.counts).reduce((a, b) => a + b, 0);
+                const diff = config.total - sum;
+                const status = document.getElementById('setup-status');
+                const btn = document.getElementById('btn-setup-done');
+                
+                if (diff === 0) {
+                    status.innerHTML = "<span style='color:#4caf50'>配置正確</span>";
+                    btn.style.opacity = 1;
+                    btn.style.pointerEvents = "all";
+                } else {
+                    status.innerHTML = `<span style='color:#ff5252'>目前分配: ${sum} / ${config.total} (差 ${diff})</span>`;
+                    btn.style.opacity = 0.5;
+                    btn.style.pointerEvents = "none";
+                }
+            },
+
+            renderRoleSetup: () => {
+                const list = document.getElementById('role-list-container');
+                list.innerHTML = "";
+                // 排序：狼 -> 神 -> 民
+                const keys = Object.keys(ROLES).sort((a,b) => {
+                    const map = {wolf:1, god:2, human:3, other:4};
+                    return map[ROLES[a].camp] - map[ROLES[b].camp];
+                });
+
+                keys.forEach(k => {
+                    const r = ROLES[k];
+                    const count = config.counts[k] || 0;
+                    const row = document.createElement('div');
+                    row.className = "role-row";
+                    const color = r.camp === 'wolf' ? '#ff5252' : (r.camp === 'god' ? '#ffd700' : '#448aff');
+                    row.innerHTML = `
+                        <span style="color:${color}; font-weight:bold;">${r.name}</span>
+                        <div class="counter">
+                            <div class="c-btn" onclick="app.adjustRole('${k}', -1)">-</div>
+                            <span id="count-${k}" style="width:20px; text-align:center;">${count}</span>
+                            <div class="c-btn" onclick="app.adjustRole('${k}', 1)">+</div>
+                        </div>
+                    `;
+                    list.appendChild(row);
+                });
+            },
+
+            finishSetup: () => {
+                // 產生牌堆
+                let deck = [];
+                for(let k in config.counts) {
+                    for(let i=0; i<config.counts[k]; i++) deck.push(k);
+                }
+                // 洗牌
+                deck = deck.sort(() => Math.random() - 0.5);
+                
+                // 初始化玩家
+                gameState.players = deck.map((role, idx) => ({
+                    id: idx + 1,
+                    roleKey: role,
+                    status: 'alive',
+                    checked: false
+                }));
+
+                app.renderRevealGrid();
+                app.showScreen('screen-reveal');
+            },
+
+            renderRevealGrid: () => {
+                const grid = document.getElementById('reveal-grid');
+                grid.innerHTML = "";
+                gameState.players.forEach(p => {
+                    const btn = document.createElement('div');
+                    btn.className = "grid-btn";
+                    btn.innerText = p.id;
+                    btn.onclick = () => app.revealCard(p);
+                    if(p.checked) {
+                        btn.style.background = "#555";
+                        btn.style.color = "#888";
+                    }
+                    grid.appendChild(btn);
+                });
+
+                if(gameState.players.every(p => p.checked)) {
+                    document.getElementById('btn-start-game').classList.remove('hidden');
+                }
+            },
+
+            revealCard: (player) => {
+                const r = ROLES[player.roleKey];
+                document.getElementById('card-name').innerText = r.name;
+                document.getElementById('card-camp').innerText = r.camp === 'wolf' ? "狼人陣營" : "好人陣營";
+                document.getElementById('card-camp').className = `tag ${r.camp === 'wolf' ? 'tag-wolf' : 'tag-villager'}`;
+                document.getElementById('card-desc').innerText = r.desc;
+                document.getElementById('overlay-reveal').style.display = 'flex';
+                
+                player.checked = true;
+                app.renderRevealGrid();
+            },
+
+            startGameLoop: () => {
+                gameState.nightCount = 0;
+                gameEngine.startNight();
+            }
+        };
+
+        // ================= 遊戲引擎 (核心邏輯) =================
+        const gameEngine = {
+            queue: [], // 夜晚喚醒順序
+            currentRole: null, // 當前喚醒的角色
+            tempSelection: null, // 當前選擇的目標
+
+            startNight: () => {
+                gameState.nightCount++;
+                gameState.actions = {}; // 重置當晚動作
+                gameState.deathList = []; // 重置死亡清單
+
+                // 1. 定義喚醒順序 (優先級)
+                // 這裡只列出主要順序，系統會自動跳過不存在的角色
+                const priority = ['thief', 'cupid', 'magician', 'nightmare', 'guard', 'werewolf', 'witch', 'seer', 'hunter_evil', 'dreamer'];
+                
+                // 2. 過濾出存在的角色
+                gameEngine.queue = [];
+                
+                // 2.1 必須有的環節
+                if(gameState.nightCount === 1) {
+                    if(config.counts.thief > 0) gameEngine.queue.push('thief');
+                    if(config.counts.cupid > 0) gameEngine.queue.push('cupid');
+                }
+                
+                // 2.2 常規環節 (判斷角色是否活著)
+                // 狼人只要有任一隻活著就要喚醒
+                const wolvesAlive = gameState.players.some(p => ROLES[p.roleKey].camp === 'wolf' && p.status === 'alive');
+                if(wolvesAlive) gameEngine.queue.push('werewolf');
+
+                // 其他神職
+                const gods = ['guard', 'witch', 'seer', 'magician', 'nightmare', 'hunter_evil', 'dreamer'];
+                gods.forEach(g => {
+                    const p = gameState.players.find(x => x.roleKey === g && x.status === 'alive');
+                    if(p) gameEngine.queue.push(g);
+                });
+
+                app.showScreen('screen-game');
+                gameEngine.nextStep();
+            },
+
+            nextStep: () => {
+                // 如果佇列空了，天亮
+                if(gameEngine.queue.length === 0) {
+                    gameEngine.resolveDay();
+                    return;
+                }
+
+                // 取出下一個角色
+                const roleKey = gameEngine.queue.shift();
+                gameEngine.currentRole = roleKey;
+                gameEngine.tempSelection = null; // 重置選擇
+
+                // 渲染介面
+                const title = document.getElementById('game-phase-title');
+                const instruction = document.getElementById('game-instruction');
+                const actionArea = document.getElementById('game-action-area');
+                actionArea.innerHTML = ""; // 清空操作區
+
+                // --- 通用過場 (傳遞手機) ---
+                // 實務上這裡應該有一個 "點擊確認身分" 的遮罩，簡化起見直接顯示
+                title.innerText = `${ROLES[roleKey].name} 請睜眼`;
+                instruction.innerText = "請執行你的技能";
+
+                // --- 根據角色渲染操作 UI ---
+                if (roleKey === 'werewolf') {
+                    instruction.innerText = "請選擇今晚擊殺的目標";
+                    gameEngine.renderPlayerGrid(actionArea, (pid) => {
+                        gameEngine.tempSelection = pid;
+                        // 狼人標記
+                    });
+                } else if (roleKey === 'seer') {
+                    instruction.innerText = "請選擇查驗對象";
+                    gameEngine.renderPlayerGrid(actionArea, (pid) => {
+                        gameEngine.checkPlayer(pid); // 預言家特殊邏輯
+                    });
+                } else if (roleKey === 'witch') {
+                    gameEngine.renderWitchUI(actionArea);
+                } else {
+                    // 通用技能 UI (守衛、獵魔人等)
+                    instruction.innerText = "請選擇技能目標 (若不發動請直接下一步)";
+                    gameEngine.renderPlayerGrid(actionArea, (pid) => {
+                        gameEngine.tempSelection = pid;
+                    });
+                }
+            },
+
+            // 生成玩家網格
+            renderPlayerGrid: (container, callback) => {
+                const grid = document.createElement('div');
+                grid.className = 'grid-container';
+                gameState.players.forEach(p => {
+                    const btn = document.createElement('div');
+                    btn.className = 'grid-btn';
+                    btn.innerText = p.id;
+                    if (p.status === 'dead') btn.classList.add('dead');
+                    
+                    btn.onclick = () => {
+                        // 清除其他選取
+                        grid.querySelectorAll('.grid-btn').forEach(b => b.classList.remove('selected'));
+                        btn.classList.add('selected');
+                        callback(p.id);
+                    };
+                    grid.appendChild(btn);
+                });
+                container.appendChild(grid);
+            },
+
+            // 預言家查驗邏輯
+            checkPlayer: (pid) => {
+                gameEngine.tempSelection = pid;
+                const target = gameState.players.find(p => p.id === pid);
+                const role = ROLES[target.roleKey];
+                // 雪狼判定
+                let isGood = (role.camp !== 'wolf' || target.roleKey === 'snow_wolf');
+                alert(`查驗結果：${isGood ? "好人" : "狼人"}`);
+            },
+
+            // 女巫特殊介面
+            renderWitchUI: (container) => {
+                const deadId = gameState.actions.wolfKill; // 獲取狼刀
+                const info = document.createElement('div');
+                
+                // 女巫能看到誰死
+                info.innerHTML = `<p>昨晚死亡玩家: ${deadId ? deadId + "號" : "無人死亡"}</p>`;
+                info.style.marginBottom = "20px";
+                
+                const btnSave = document.createElement('button');
+                btnSave.className = "btn-secondary";
+                btnSave.innerText = "使用解藥";
+                btnSave.onclick = () => { 
+                    gameState.actions.witchSave = true; 
+                    btnSave.style.background = "#4caf50"; 
+                };
+
+                const btnPoison = document.createElement('div');
+                btnPoison.innerHTML = "<p>使用毒藥 (點擊下方玩家):</p>";
+                
+                container.appendChild(info);
+                if(deadId) container.appendChild(btnSave);
+                container.appendChild(btnPoison);
+                
+                gameEngine.renderPlayerGrid(container, (pid) => {
+                    gameState.actions.witchPoison = pid;
+                });
+            },
+
+            // 天亮結算
+            resolveDay: () => {
+                document.getElementById('game-phase-title').innerText = "天亮了";
+                document.getElementById('game-instruction').innerText = "請主持人宣佈昨夜結果";
+                document.getElementById('game-action-area').innerHTML = "";
+                
+                // 1. 紀錄狼刀
+                if(gameEngine.tempSelection && gameEngine.currentRole === 'werewolf') {
+                     // 最後一步通常不是狼，需從 actions 讀取，這裡簡化邏輯：
+                     // 假設每一步 Next 之後都有把 tempSelection 存入 actions
+                }
+                
+                // 這裡是一個簡化的結算邏輯
+                // 實際需在 nextStep 按下時，將 tempSelection 存入 gameState.actions[roleKey]
+
+                // 手動修正動作儲存 (為了MVP簡單化，放在這裡做個概念)
+                // 正常應在 nextStep 中 switch case 處理儲存
+                
+                let dead = [];
+                let wolfTarget = gameState.actions.werewolf; 
+                let guardTarget = gameState.actions.guard;
+                let witchSave = gameState.actions.witchSave;
+                let witchPoison = gameState.actions.witchPoison;
+
+                // 結算狼刀
+                if(wolfTarget) {
+                    if(wolfTarget !== guardTarget && !witchSave) {
+                        dead.push(wolfTarget);
+                    }
+                    if(wolfTarget === guardTarget && witchSave) {
+                        // 奶穿 (同守同救)
+                        dead.push(wolfTarget); 
+                    }
+                }
+                // 結算毒藥
+                if(witchPoison) dead.push(witchPoison);
+
+                // 去重
+                dead = [...new Set(dead)];
+
+                // 顯示結果
+                const resultDiv = document.createElement('div');
+                resultDiv.innerHTML = `
+                    <h3 style="color:#ff5252; font-size:2rem;">
+                        ${dead.length > 0 ? `昨夜死亡: ${dead.join(', ')}號` : "昨夜是平安夜"}
+                    </h3>
+                    <button class="btn-main" onclick="app.startGameLoop()">進入下一夜</button>
+                    <p style="margin-top:20px; color:#888;">(此版本為自動化演示，實際死亡需手動標記)</p>
+                `;
+                document.getElementById('game-action-area').appendChild(resultDiv);
+            }
+        };
+
+        // 攔截 Next Step 按鈕，儲存動作
+        const originalNext = gameEngine.nextStep;
+        gameEngine.nextStep = () => {
+            if(gameEngine.currentRole && gameEngine.tempSelection) {
+                // 儲存動作
+                if(gameEngine.currentRole === 'werewolf') gameState.actions.wolfKill = gameEngine.tempSelection;
+                if(gameEngine.currentRole === 'guard') gameState.actions.guard = gameEngine.tempSelection;
+                gameState.actions[gameEngine.currentRole] = gameEngine.tempSelection;
+            }
+            originalNext();
+        };
+
+    </script>
+</body>
+</html>
