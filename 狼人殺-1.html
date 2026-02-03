@@ -1,0 +1,1378 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:"Arial Unicode MS";
+	panose-1:2 11 6 4 2 2 2 2 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Arial",sans-serif;}
+.MsoChpDefault
+	{font-family:"Arial",sans-serif;}
+.MsoPapDefault
+	{line-height:115%;}
+@page WordSection1
+	{size:595.45pt 841.7pt;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US style='word-wrap:break-word'>
+
+<div class=WordSection1>
+
+<p class=MsoNormal>&lt;!DOCTYPE html&gt;</p>
+
+<p class=MsoNormal>&lt;html lang=&quot;zh-TW&quot;&gt;</p>
+
+<p class=MsoNormal>&lt;head&gt;</p>
+
+<p class=MsoNormal>    &lt;meta charset=&quot;UTF-8&quot;&gt;</p>
+
+<p class=MsoNormal>    &lt;meta name=&quot;viewport&quot;
+content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0,
+user-scalable=no&quot;&gt;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>   
+&lt;title&gt;全能狼人殺法官&lt;/title&gt;</span></p>
+
+<p class=MsoNormal>    &lt;style&gt;</p>
+
+<p class=MsoNormal>        :root {</p>
+
+<p class=MsoNormal>            --bg-color: #121212;</p>
+
+<p class=MsoNormal>            --text-color: #e0e0e0;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+--accent-color: #d32f2f; /* 狼人紅 */</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+--primary-color: #1976d2; /* 好人藍 */</span></p>
+
+<p class=MsoNormal>            --card-bg: #1e1e1e;</p>
+
+<p class=MsoNormal>            --highlight: #ffd700;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        body {</p>
+
+<p class=MsoNormal>            background-color: var(--bg-color);</p>
+
+<p class=MsoNormal>            color: var(--text-color);</p>
+
+<p class=MsoNormal>            font-family: 'PingFang TC', 'Microsoft
+JhengHei', sans-serif;</p>
+
+<p class=MsoNormal>            margin: 0; padding: 0;</p>
+
+<p class=MsoNormal>            display: flex; flex-direction: column;
+align-items: center;</p>
+
+<p class=MsoNormal>            min-height: 100vh;</p>
+
+<p class=MsoNormal>            user-select: none;</p>
+
+<p class=MsoNormal>            overflow-x: hidden;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>        /* 通用元件
+*/</span></p>
+
+<p class=MsoNormal>        .screen { display: none; width: 100%; max-width:
+600px; padding: 20px; box-sizing: border-box; flex-direction: column;
+align-items: center; }</p>
+
+<p class=MsoNormal>        .active { display: flex; }</p>
+
+<p class=MsoNormal>        </p>
+
+<p class=MsoNormal>        h1 { font-size: 2.5rem; letter-spacing: 3px;
+text-shadow: 0 0 10px var(--accent-color); margin: 20px 0; }</p>
+
+<p class=MsoNormal>        h2 { border-bottom: 2px solid #333; width: 100%;
+text-align: center; padding-bottom: 10px; margin-bottom: 20px; }</p>
+
+<p class=MsoNormal>        </p>
+
+<p class=MsoNormal>        .btn-main {</p>
+
+<p class=MsoNormal>            padding: 15px 0; width: 80%; font-size: 1.2rem;</p>
+
+<p class=MsoNormal>            background: linear-gradient(45deg, #cc2b5e,
+#753a88);</p>
+
+<p class=MsoNormal>            color: white; border: none; border-radius: 50px;</p>
+
+<p class=MsoNormal>            cursor: pointer; margin-top: 20px; box-shadow: 0
+4px 15px rgba(0,0,0,0.5);</p>
+
+<p class=MsoNormal>            transition: transform 0.2s;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>        .btn-main:active { transform: scale(0.95); }</p>
+
+<p class=MsoNormal>        .btn-secondary { background: #444; margin-top: 10px;
+font-size: 1rem; padding: 10px 20px; width: auto; }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>        /* 格子系統
+*/</span></p>
+
+<p class=MsoNormal>        .grid-container {</p>
+
+<p class=MsoNormal>            display: grid; grid-template-columns: repeat(4,
+1fr); gap: 10px; width: 100%;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>        .grid-btn {</p>
+
+<p class=MsoNormal>            aspect-ratio: 1; background: #333; border: 2px solid
+#555; border-radius: 10px;</p>
+
+<p class=MsoNormal>            display: flex; justify-content: center;
+align-items: center;</p>
+
+<p class=MsoNormal>            font-size: 1.5rem; font-weight: bold; cursor:
+pointer; position: relative;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>        .grid-btn.selected { background:
+var(--accent-color); border-color: white; color: white; }</p>
+
+<p class=MsoNormal>        .grid-btn.dead { opacity: 0.3; pointer-events: none;
+background: #000; text-decoration: line-through; }</p>
+
+<p class=MsoNormal>        .grid-btn .badge {</p>
+
+<p class=MsoNormal>            position: absolute; top: -5px; right: -5px;
+font-size: 0.7rem; </p>
+
+<p class=MsoNormal>            background: var(--primary-color); padding: 2px
+5px; border-radius: 5px;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>        /* 角色設定列表
+*/</span></p>
+
+<p class=MsoNormal>        .role-list { width: 100%; max-height: 50vh;
+overflow-y: auto; background: #1a1a1a; padding: 10px; border-radius: 10px; }</p>
+
+<p class=MsoNormal>        .role-row { display: flex; justify-content:
+space-between; align-items: center; padding: 10px; border-bottom: 1px solid
+#333; }</p>
+
+<p class=MsoNormal>        .counter { display: flex; gap: 10px; align-items:
+center; }</p>
+
+<p class=MsoNormal>        .c-btn { width: 30px; height: 30px; background:
+#444; border-radius: 50%; text-align: center; line-height: 30px; }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>        /* 彈窗與覆蓋層
+*/</span></p>
+
+<p class=MsoNormal>        .overlay {</p>
+
+<p class=MsoNormal>            position: fixed; top: 0; left: 0; width: 100%;
+height: 100%;</p>
+
+<p class=MsoNormal>            background: black; z-index: 100;</p>
+
+<p class=MsoNormal>            display: none; flex-direction: column;
+justify-content: center; align-items: center;</p>
+
+<p class=MsoNormal>            text-align: center; padding: 20px;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>        .role-card {</p>
+
+<p class=MsoNormal>            background: #222; border: 2px solid #666;
+padding: 30px; border-radius: 15px; width: 80%;</p>
+
+<p class=MsoNormal>            box-shadow: 0 0 20px rgba(255,255,255,0.1);</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>        .info-text { font-size: 1.2rem; margin: 20px 0;
+line-height: 1.5; color: #ccc; }</p>
+
+<p class=MsoNormal>        .action-area { width: 100%; margin-top: 20px; }</p>
+
+<p class=MsoNormal>        </p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>        /* 狀態標籤
+*/</span></p>
+
+<p class=MsoNormal>        .tag { padding: 3px 8px; border-radius: 4px;
+font-size: 0.8rem; margin-right: 5px; }</p>
+
+<p class=MsoNormal>        .tag-wolf { background: #d32f2f; color: white; }</p>
+
+<p class=MsoNormal>        .tag-god { background: #fbc02d; color: black; }</p>
+
+<p class=MsoNormal>        .tag-villager { background: #1976d2; color: white; }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>        /* 動畫
+*/</span></p>
+
+<p class=MsoNormal>        @keyframes pulse { 0% { opacity: 1; } 50% { opacity:
+0.5; } 100% { opacity: 1; } }</p>
+
+<p class=MsoNormal>        .blink { animation: pulse 2s infinite; }</p>
+
+<p class=MsoNormal>    &lt;/style&gt;</p>
+
+<p class=MsoNormal>&lt;/head&gt;</p>
+
+<p class=MsoNormal>&lt;body&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>    &lt;div id=&quot;screen-home&quot; class=&quot;screen
+active&quot; onclick=&quot;app.goToSetup()&quot;&gt;</p>
+
+<p class=MsoNormal>        &lt;div style=&quot;flex:1; display:flex;
+flex-direction:column; justify-content:center; align-items:center;&quot;&gt;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+&lt;h1&gt;狼人殺&lt;/h1&gt;</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+&lt;div class=&quot;blink&quot; style=&quot;color:#888;
+margin-top:20px;&quot;&gt;點擊任意位置開始&lt;/div&gt;</span></p>
+
+<p class=MsoNormal>        &lt;/div&gt;</p>
+
+<p class=MsoNormal>    &lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>    &lt;div id=&quot;screen-setup&quot;
+class=&quot;screen&quot;&gt;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>       
+&lt;h2&gt;遊戲配置&lt;/h2&gt;</span></p>
+
+<p class=MsoNormal>        &lt;div style=&quot;display:flex;
+justify-content:space-between; width:100%; margin-bottom:10px;&quot;&gt;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+&lt;span&gt;總人數: &lt;b id=&quot;total-display&quot;
+style=&quot;font-size:1.5rem&quot;&gt;10&lt;/b&gt;&lt;/span&gt;</span></p>
+
+<p class=MsoNormal>            &lt;div class=&quot;counter&quot;&gt;</p>
+
+<p class=MsoNormal>                &lt;div class=&quot;c-btn&quot;
+onclick=&quot;app.adjustTotal(-1)&quot;&gt;-&lt;/div&gt;</p>
+
+<p class=MsoNormal>                &lt;div class=&quot;c-btn&quot;
+onclick=&quot;app.adjustTotal(1)&quot;&gt;+&lt;/div&gt;</p>
+
+<p class=MsoNormal>            &lt;/div&gt;</p>
+
+<p class=MsoNormal>        &lt;/div&gt;</p>
+
+<p class=MsoNormal>        </p>
+
+<p class=MsoNormal>        &lt;div class=&quot;role-list&quot;
+id=&quot;role-list-container&quot;&gt;</p>
+
+<p class=MsoNormal>            &lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>        &lt;div
+id=&quot;setup-status&quot; style=&quot;margin:10px 0; color:#888;&quot;&gt;正在配置...&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>       
+&lt;button id=&quot;btn-setup-done&quot; class=&quot;btn-main&quot;
+style=&quot;opacity:0.5; pointer-events:none;&quot;
+onclick=&quot;app.finishSetup()&quot;&gt;配置完成&lt;/button&gt;</span></p>
+
+<p class=MsoNormal>    &lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>    &lt;div id=&quot;screen-reveal&quot;
+class=&quot;screen&quot;&gt;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>       
+&lt;h2&gt;身分發放&lt;/h2&gt;</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>        &lt;p
+style=&quot;color:#888;&quot;&gt;請玩家依序點擊查看身分&lt;/p&gt;</span></p>
+
+<p class=MsoNormal>        &lt;div id=&quot;reveal-grid&quot;
+class=&quot;grid-container&quot;&gt;&lt;/div&gt;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>       
+&lt;button id=&quot;btn-start-game&quot; class=&quot;btn-main hidden&quot;
+onclick=&quot;app.startGameLoop()&quot;&gt;進入天黑&lt;/button&gt;</span></p>
+
+<p class=MsoNormal>    &lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>    &lt;div id=&quot;screen-game&quot; class=&quot;screen&quot;&gt;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>        &lt;h2
+id=&quot;game-phase-title&quot;&gt;天黑請閉眼&lt;/h2&gt;</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>        &lt;div
+id=&quot;game-instruction&quot; class=&quot;info-text&quot;&gt;請將手機傳給...&lt;/div&gt;</span></p>
+
+<p class=MsoNormal>        </p>
+
+<p class=MsoNormal>        &lt;div id=&quot;game-action-area&quot;
+class=&quot;action-area&quot;&gt;</p>
+
+<p class=MsoNormal>            &lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>       
+&lt;button id=&quot;btn-action-confirm&quot; class=&quot;btn-main&quot;
+onclick=&quot;gameEngine.nextStep()&quot;&gt;確認 / 下一步&lt;/button&gt;</span></p>
+
+<p class=MsoNormal>    &lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>    &lt;div id=&quot;overlay-reveal&quot;
+class=&quot;overlay&quot; onclick=&quot;this.style.display='none'&quot;&gt;</p>
+
+<p class=MsoNormal>        &lt;div class=&quot;role-card&quot;&gt;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+&lt;h2 id=&quot;card-name&quot;&gt;角色名&lt;/h2&gt;</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+&lt;div id=&quot;card-camp&quot; class=&quot;tag&quot;&gt;陣營&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+&lt;p id=&quot;card-desc&quot; style=&quot;text-align:left; margin-top:15px;
+color:#ddd;&quot;&gt;說明&lt;/p&gt;</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+&lt;div style=&quot;margin-top:30px; font-size:0.9rem; color:#666;&quot;&gt;點擊關閉&lt;/div&gt;</span></p>
+
+<p class=MsoNormal>        &lt;/div&gt;</p>
+
+<p class=MsoNormal>    &lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>    &lt;script&gt;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>        //
+================= 資料庫 =================</span></p>
+
+<p class=MsoNormal>        const ROLES = {</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>            // 狼人</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+werewolf: { name: &quot;狼人&quot;, camp: &quot;wolf&quot;, type:
+&quot;wolf&quot;, desc: &quot;每晚與隊友討論並擊殺一名玩家。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+wolf_king: { name: &quot;黑狼王&quot;, camp: &quot;wolf&quot;, type:
+&quot;wolf&quot;, desc: &quot;出局可帶走一人，被毒死不可發動。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+white_wolf: { name: &quot;白狼王&quot;, camp: &quot;wolf&quot;, type:
+&quot;wolf&quot;, desc: &quot;白天可自爆帶走一人。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+wolf_beauty: { name: &quot;狼美人&quot;, camp: &quot;wolf&quot;, type:
+&quot;wolf&quot;, desc: &quot;每晚魅惑一人，死時帶走該人。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+gargoyle: { name: &quot;石像鬼&quot;, camp: &quot;wolf&quot;, type:
+&quot;wolf&quot;, desc: &quot;查驗具體身分。隊友死光才可刀人。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+snow_wolf: { name: &quot;雪狼&quot;, camp: &quot;wolf&quot;, type:
+&quot;wolf&quot;, desc: &quot;被預言家查驗顯示為好人。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+mech_wolf: { name: &quot;機械狼&quot;, camp: &quot;wolf&quot;, type:
+&quot;wolf&quot;, desc: &quot;首夜學習技能。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+nightmare: { name: &quot;夢魘&quot;, camp: &quot;wolf&quot;, type:
+&quot;wolf&quot;, desc: &quot;每晚恐懼一人使技能失效。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>            // 神職</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+seer: { name: &quot;預言家&quot;, camp: &quot;god&quot;, type: &quot;god&quot;,
+desc: &quot;每晚查驗一人陣營。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+witch: { name: &quot;女巫&quot;, camp: &quot;god&quot;, type: &quot;god&quot;,
+desc: &quot;解藥救人，毒藥殺人。一晚一藥。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+hunter: { name: &quot;獵人&quot;, camp: &quot;god&quot;, type: &quot;god&quot;,
+desc: &quot;出局開槍。被毒/夢死不可開。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>            guard:
+{ name: &quot;守衛&quot;, camp: &quot;god&quot;, type: &quot;god&quot;, desc:
+&quot;每晚守一人，不可連守。同守同救死。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+knight: { name: &quot;騎士&quot;, camp: &quot;god&quot;, type: &quot;god&quot;,
+desc: &quot;白天決鬥。狼死或自死。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+idiot: { name: &quot;白痴&quot;, camp: &quot;god&quot;, type: &quot;god&quot;,
+desc: &quot;被投翻牌免死。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>            dreamer:
+{ name: &quot;攝夢人&quot;, camp: &quot;god&quot;, type: &quot;god&quot;, desc:
+&quot;攝夢免疫刀毒。連攝兩晚或攝夢死則目標死。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+merchant: { name: &quot;黑市商人&quot;, camp: &quot;god&quot;, type:
+&quot;god&quot;, desc: &quot;首夜送技能。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+magician: { name: &quot;魔術師&quot;, camp: &quot;god&quot;, type:
+&quot;god&quot;, desc: &quot;交換兩人號碼。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>            medium:
+{ name: &quot;通靈師&quot;, camp: &quot;god&quot;, type: &quot;god&quot;, desc:
+&quot;查驗具體身分。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+grave_keeper: { name: &quot;守墓人&quot;, camp: &quot;god&quot;, type:
+&quot;god&quot;, desc: &quot;知曉白天出局者陣營。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+hunter_evil: { name: &quot;獵魔人&quot;, camp: &quot;god&quot;, type:
+&quot;god&quot;, desc: &quot;夜間狩獵，狼死或自死。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>            // 平民</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+villager: { name: &quot;平民&quot;, camp: &quot;human&quot;, type:
+&quot;human&quot;, desc: &quot;無技能，用邏輯投票。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>            // 特殊</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+cupid: { name: &quot;邱比特&quot;, camp: &quot;other&quot;, type: &quot;god&quot;,
+desc: &quot;連情侶。&quot; },</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+thief: { name: &quot;盜賊&quot;, camp: &quot;other&quot;, type: &quot;god&quot;, desc:
+&quot;選牌。&quot; }</span></p>
+
+<p class=MsoNormal>        };</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>        // 預設配置</span></p>
+
+<p class=MsoNormal>        let config = {</p>
+
+<p class=MsoNormal>            total: 10,</p>
+
+<p class=MsoNormal>            counts: { werewolf: 3, villager: 4, seer: 1,
+witch: 1, hunter: 1 }</p>
+
+<p class=MsoNormal>        };</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>        // 遊戲狀態</span></p>
+
+<p class=MsoNormal>        let gameState = {</p>
+
+<p class=MsoNormal>            players: [], // {id, roleKey, status:
+'alive'|'dead', isWolf}</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+step: 0,     // 當前步驟</span></p>
+
+<p class=MsoNormal>            nightCount: 0,</p>
+
+<p class=MsoNormal>            deathList: [],</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+actions: {}  // 儲存當晚動作 { wolfKill: 1, witchSave: true, etc. }</span></p>
+
+<p class=MsoNormal>        };</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>        //
+================= 應用程式控制 =================</span></p>
+
+<p class=MsoNormal>        const app = {</p>
+
+<p class=MsoNormal>            showScreen: (id) =&gt; {</p>
+
+<p class=MsoNormal>               
+document.querySelectorAll('.screen').forEach(s =&gt;
+s.classList.remove('active'));</p>
+
+<p class=MsoNormal>                document.getElementById(id).classList.add('active');</p>
+
+<p class=MsoNormal>            },</p>
+
+<p class=MsoNormal>            </p>
+
+<p class=MsoNormal>            goToSetup: () =&gt; {</p>
+
+<p class=MsoNormal>                app.renderRoleSetup();</p>
+
+<p class=MsoNormal>                app.updateCheck();</p>
+
+<p class=MsoNormal>                app.showScreen('screen-setup');</p>
+
+<p class=MsoNormal>            },</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>            adjustTotal: (delta) =&gt; {</p>
+
+<p class=MsoNormal>                if (config.total + delta &lt; 5) return;</p>
+
+<p class=MsoNormal>                config.total += delta;</p>
+
+<p class=MsoNormal>               
+document.getElementById('total-display').innerText = config.total;</p>
+
+<p class=MsoNormal>                app.updateCheck();</p>
+
+<p class=MsoNormal>            },</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>            adjustRole: (key, delta) =&gt; {</p>
+
+<p class=MsoNormal>                if (!config.counts[key]) config.counts[key]
+= 0;</p>
+
+<p class=MsoNormal>                if (config.counts[key] + delta &lt; 0)
+return;</p>
+
+<p class=MsoNormal>                config.counts[key] += delta;</p>
+
+<p class=MsoNormal>               
+document.getElementById(`count-${key}`).innerText = config.counts[key];</p>
+
+<p class=MsoNormal>                app.updateCheck();</p>
+
+<p class=MsoNormal>            },</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>            updateCheck: () =&gt; {</p>
+
+<p class=MsoNormal>                let sum =
+Object.values(config.counts).reduce((a, b) =&gt; a + b, 0);</p>
+
+<p class=MsoNormal>                const diff = config.total - sum;</p>
+
+<p class=MsoNormal>                const status =
+document.getElementById('setup-status');</p>
+
+<p class=MsoNormal>                const btn =
+document.getElementById('btn-setup-done');</p>
+
+<p class=MsoNormal>                </p>
+
+<p class=MsoNormal>                if (diff === 0) {</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>                    status.innerHTML
+= &quot;&lt;span style='color:#4caf50'&gt;配置正確&lt;/span&gt;&quot;;</span></p>
+
+<p class=MsoNormal>                    btn.style.opacity = 1;</p>
+
+<p class=MsoNormal>                    btn.style.pointerEvents =
+&quot;all&quot;;</p>
+
+<p class=MsoNormal>                } else {</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>                   
+status.innerHTML = `&lt;span style='color:#ff5252'&gt;目前分配: ${sum} /
+${config.total} (差 ${diff})&lt;/span&gt;`;</span></p>
+
+<p class=MsoNormal>                    btn.style.opacity = 0.5;</p>
+
+<p class=MsoNormal>                    btn.style.pointerEvents =
+&quot;none&quot;;</p>
+
+<p class=MsoNormal>                }</p>
+
+<p class=MsoNormal>            },</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>            renderRoleSetup: () =&gt; {</p>
+
+<p class=MsoNormal>                const list =
+document.getElementById('role-list-container');</p>
+
+<p class=MsoNormal>                list.innerHTML = &quot;&quot;;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 排序：狼 -&gt; 神 -&gt; 民</span></p>
+
+<p class=MsoNormal>                const keys = Object.keys(ROLES).sort((a,b)
+=&gt; {</p>
+
+<p class=MsoNormal>                    const map = {wolf:1, god:2, human:3,
+other:4};</p>
+
+<p class=MsoNormal>                    return map[ROLES[a].camp] -
+map[ROLES[b].camp];</p>
+
+<p class=MsoNormal>                });</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>                keys.forEach(k =&gt; {</p>
+
+<p class=MsoNormal>                    const r = ROLES[k];</p>
+
+<p class=MsoNormal>                    const count = config.counts[k] || 0;</p>
+
+<p class=MsoNormal>                    const row =
+document.createElement('div');</p>
+
+<p class=MsoNormal>                    row.className = &quot;role-row&quot;;</p>
+
+<p class=MsoNormal>                    const color = r.camp === 'wolf' ?
+'#ff5252' : (r.camp === 'god' ? '#ffd700' : '#448aff');</p>
+
+<p class=MsoNormal>                    row.innerHTML = `</p>
+
+<p class=MsoNormal>                        &lt;span style=&quot;color:${color};
+font-weight:bold;&quot;&gt;${r.name}&lt;/span&gt;</p>
+
+<p class=MsoNormal>                        &lt;div
+class=&quot;counter&quot;&gt;</p>
+
+<p class=MsoNormal>                            &lt;div class=&quot;c-btn&quot;
+onclick=&quot;app.adjustRole('${k}', -1)&quot;&gt;-&lt;/div&gt;</p>
+
+<p class=MsoNormal>                            &lt;span
+id=&quot;count-${k}&quot; style=&quot;width:20px;
+text-align:center;&quot;&gt;${count}&lt;/span&gt;</p>
+
+<p class=MsoNormal>                            &lt;div class=&quot;c-btn&quot;
+onclick=&quot;app.adjustRole('${k}', 1)&quot;&gt;+&lt;/div&gt;</p>
+
+<p class=MsoNormal>                        &lt;/div&gt;</p>
+
+<p class=MsoNormal>                    `;</p>
+
+<p class=MsoNormal>                    list.appendChild(row);</p>
+
+<p class=MsoNormal>                });</p>
+
+<p class=MsoNormal>            },</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>            finishSetup: () =&gt; {</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 產生牌堆</span></p>
+
+<p class=MsoNormal>                let deck = [];</p>
+
+<p class=MsoNormal>                for(let k in config.counts) {</p>
+
+<p class=MsoNormal>                    for(let i=0; i&lt;config.counts[k]; i++)
+deck.push(k);</p>
+
+<p class=MsoNormal>                }</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 洗牌</span></p>
+
+<p class=MsoNormal>                deck = deck.sort(() =&gt; Math.random() -
+0.5);</p>
+
+<p class=MsoNormal>                </p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 初始化玩家</span></p>
+
+<p class=MsoNormal>                gameState.players = deck.map((role, idx)
+=&gt; ({</p>
+
+<p class=MsoNormal>                    id: idx + 1,</p>
+
+<p class=MsoNormal>                    roleKey: role,</p>
+
+<p class=MsoNormal>                    status: 'alive',</p>
+
+<p class=MsoNormal>                    checked: false</p>
+
+<p class=MsoNormal>                }));</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>                app.renderRevealGrid();</p>
+
+<p class=MsoNormal>                app.showScreen('screen-reveal');</p>
+
+<p class=MsoNormal>            },</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>            renderRevealGrid: () =&gt; {</p>
+
+<p class=MsoNormal>                const grid =
+document.getElementById('reveal-grid');</p>
+
+<p class=MsoNormal>                grid.innerHTML = &quot;&quot;;</p>
+
+<p class=MsoNormal>                gameState.players.forEach(p =&gt; {</p>
+
+<p class=MsoNormal>                    const btn =
+document.createElement('div');</p>
+
+<p class=MsoNormal>                    btn.className = &quot;grid-btn&quot;;</p>
+
+<p class=MsoNormal>                    btn.innerText = p.id;</p>
+
+<p class=MsoNormal>                    btn.onclick = () =&gt;
+app.revealCard(p);</p>
+
+<p class=MsoNormal>                    if(p.checked) {</p>
+
+<p class=MsoNormal>                        btn.style.background =
+&quot;#555&quot;;</p>
+
+<p class=MsoNormal>                        btn.style.color = &quot;#888&quot;;</p>
+
+<p class=MsoNormal>                    }</p>
+
+<p class=MsoNormal>                    grid.appendChild(btn);</p>
+
+<p class=MsoNormal>                });</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>                if(gameState.players.every(p =&gt;
+p.checked)) {</p>
+
+<p class=MsoNormal>                   
+document.getElementById('btn-start-game').classList.remove('hidden');</p>
+
+<p class=MsoNormal>                }</p>
+
+<p class=MsoNormal>            },</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>            revealCard: (player) =&gt; {</p>
+
+<p class=MsoNormal>                const r = ROLES[player.roleKey];</p>
+
+<p class=MsoNormal>               
+document.getElementById('card-name').innerText = r.name;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+document.getElementById('card-camp').innerText = r.camp === 'wolf' ? &quot;狼人陣營&quot;
+: &quot;好人陣營&quot;;</span></p>
+
+<p class=MsoNormal>                document.getElementById('card-camp').className
+= `tag ${r.camp === 'wolf' ? 'tag-wolf' : 'tag-villager'}`;</p>
+
+<p class=MsoNormal>               
+document.getElementById('card-desc').innerText = r.desc;</p>
+
+<p class=MsoNormal>               
+document.getElementById('overlay-reveal').style.display = 'flex';</p>
+
+<p class=MsoNormal>                </p>
+
+<p class=MsoNormal>                player.checked = true;</p>
+
+<p class=MsoNormal>                app.renderRevealGrid();</p>
+
+<p class=MsoNormal>            },</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>            startGameLoop: () =&gt; {</p>
+
+<p class=MsoNormal>                gameState.nightCount = 0;</p>
+
+<p class=MsoNormal>                gameEngine.startNight();</p>
+
+<p class=MsoNormal>            }</p>
+
+<p class=MsoNormal>        };</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>        //
+================= 遊戲引擎 (核心邏輯) =================</span></p>
+
+<p class=MsoNormal>        const gameEngine = {</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+queue: [], // 夜晚喚醒順序</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+currentRole: null, // 當前喚醒的角色</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>           
+tempSelection: null, // 當前選擇的目標</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>            startNight: () =&gt; {</p>
+
+<p class=MsoNormal>                gameState.nightCount++;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+gameState.actions = {}; // 重置當晚動作</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+gameState.deathList = []; // 重置死亡清單</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 1. 定義喚醒順序 (優先級)</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 這裡只列出主要順序，系統會自動跳過不存在的角色</span></p>
+
+<p class=MsoNormal>                const priority = ['thief', 'cupid',
+'magician', 'nightmare', 'guard', 'werewolf', 'witch', 'seer', 'hunter_evil',
+'dreamer'];</p>
+
+<p class=MsoNormal>                </p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 2. 過濾出存在的角色</span></p>
+
+<p class=MsoNormal>                gameEngine.queue = [];</p>
+
+<p class=MsoNormal>                </p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 2.1 必須有的環節</span></p>
+
+<p class=MsoNormal>                if(gameState.nightCount === 1) {</p>
+
+<p class=MsoNormal>                    if(config.counts.thief &gt; 0)
+gameEngine.queue.push('thief');</p>
+
+<p class=MsoNormal>                    if(config.counts.cupid &gt; 0)
+gameEngine.queue.push('cupid');</p>
+
+<p class=MsoNormal>                }</p>
+
+<p class=MsoNormal>                </p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 2.2 常規環節 (判斷角色是否活著)</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 狼人只要有任一隻活著就要喚醒</span></p>
+
+<p class=MsoNormal>                const wolvesAlive = gameState.players.some(p
+=&gt; ROLES[p.roleKey].camp === 'wolf' &amp;&amp; p.status === 'alive');</p>
+
+<p class=MsoNormal>                if(wolvesAlive)
+gameEngine.queue.push('werewolf');</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 其他神職</span></p>
+
+<p class=MsoNormal>                const gods = ['guard', 'witch', 'seer',
+'magician', 'nightmare', 'hunter_evil', 'dreamer'];</p>
+
+<p class=MsoNormal>                gods.forEach(g =&gt; {</p>
+
+<p class=MsoNormal>                    const p = gameState.players.find(x =&gt;
+x.roleKey === g &amp;&amp; x.status === 'alive');</p>
+
+<p class=MsoNormal>                    if(p) gameEngine.queue.push(g);</p>
+
+<p class=MsoNormal>                });</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>                app.showScreen('screen-game');</p>
+
+<p class=MsoNormal>                gameEngine.nextStep();</p>
+
+<p class=MsoNormal>            },</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>            nextStep: () =&gt; {</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 如果佇列空了，天亮</span></p>
+
+<p class=MsoNormal>                if(gameEngine.queue.length === 0) {</p>
+
+<p class=MsoNormal>                    gameEngine.resolveDay();</p>
+
+<p class=MsoNormal>                    return;</p>
+
+<p class=MsoNormal>                }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 取出下一個角色</span></p>
+
+<p class=MsoNormal>                const roleKey = gameEngine.queue.shift();</p>
+
+<p class=MsoNormal>                gameEngine.currentRole = roleKey;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+gameEngine.tempSelection = null; // 重置選擇</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 渲染介面</span></p>
+
+<p class=MsoNormal>                const title =
+document.getElementById('game-phase-title');</p>
+
+<p class=MsoNormal>                const instruction =
+document.getElementById('game-instruction');</p>
+
+<p class=MsoNormal>                const actionArea =
+document.getElementById('game-action-area');</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+actionArea.innerHTML = &quot;&quot;; // 清空操作區</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// --- 通用過場 (傳遞手機) ---</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 實務上這裡應該有一個 &quot;點擊確認身分&quot; 的遮罩，簡化起見直接顯示</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+title.innerText = `${ROLES[roleKey].name} 請睜眼`;</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+instruction.innerText = &quot;請執行你的技能&quot;;</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// --- 根據角色渲染操作 UI ---</span></p>
+
+<p class=MsoNormal>                if (roleKey === 'werewolf') {</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>                   
+instruction.innerText = &quot;請選擇今晚擊殺的目標&quot;;</span></p>
+
+<p class=MsoNormal>                    gameEngine.renderPlayerGrid(actionArea,
+(pid) =&gt; {</p>
+
+<p class=MsoNormal>                        gameEngine.tempSelection = pid;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>                       
+// 狼人標記</span></p>
+
+<p class=MsoNormal>                    });</p>
+
+<p class=MsoNormal>                } else if (roleKey === 'seer') {</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>                   
+instruction.innerText = &quot;請選擇查驗對象&quot;;</span></p>
+
+<p class=MsoNormal>                    gameEngine.renderPlayerGrid(actionArea,
+(pid) =&gt; {</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>                        gameEngine.checkPlayer(pid);
+// 預言家特殊邏輯</span></p>
+
+<p class=MsoNormal>                    });</p>
+
+<p class=MsoNormal>                } else if (roleKey === 'witch') {</p>
+
+<p class=MsoNormal>                    gameEngine.renderWitchUI(actionArea);</p>
+
+<p class=MsoNormal>                } else {</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>                   
+// 通用技能 UI (守衛、獵魔人等)</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>                   
+instruction.innerText = &quot;請選擇技能目標 (若不發動請直接下一步)&quot;;</span></p>
+
+<p class=MsoNormal>                    gameEngine.renderPlayerGrid(actionArea,
+(pid) =&gt; {</p>
+
+<p class=MsoNormal>                        gameEngine.tempSelection = pid;</p>
+
+<p class=MsoNormal>                    });</p>
+
+<p class=MsoNormal>                }</p>
+
+<p class=MsoNormal>            },</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>            // 生成玩家網格</span></p>
+
+<p class=MsoNormal>            renderPlayerGrid: (container, callback) =&gt; {</p>
+
+<p class=MsoNormal>                const grid = document.createElement('div');</p>
+
+<p class=MsoNormal>                grid.className = 'grid-container';</p>
+
+<p class=MsoNormal>                gameState.players.forEach(p =&gt; {</p>
+
+<p class=MsoNormal>                    const btn =
+document.createElement('div');</p>
+
+<p class=MsoNormal>                    btn.className = 'grid-btn';</p>
+
+<p class=MsoNormal>                    btn.innerText = p.id;</p>
+
+<p class=MsoNormal>                    if (p.status === 'dead')
+btn.classList.add('dead');</p>
+
+<p class=MsoNormal>                    </p>
+
+<p class=MsoNormal>                    btn.onclick = () =&gt; {</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>                       
+// 清除其他選取</span></p>
+
+<p class=MsoNormal>                       
+grid.querySelectorAll('.grid-btn').forEach(b =&gt;
+b.classList.remove('selected'));</p>
+
+<p class=MsoNormal>                        btn.classList.add('selected');</p>
+
+<p class=MsoNormal>                        callback(p.id);</p>
+
+<p class=MsoNormal>                    };</p>
+
+<p class=MsoNormal>                    grid.appendChild(btn);</p>
+
+<p class=MsoNormal>                });</p>
+
+<p class=MsoNormal>                container.appendChild(grid);</p>
+
+<p class=MsoNormal>            },</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>            // 預言家查驗邏輯</span></p>
+
+<p class=MsoNormal>            checkPlayer: (pid) =&gt; {</p>
+
+<p class=MsoNormal>                gameEngine.tempSelection = pid;</p>
+
+<p class=MsoNormal>                const target = gameState.players.find(p
+=&gt; p.id === pid);</p>
+
+<p class=MsoNormal>                const role = ROLES[target.roleKey];</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 雪狼判定</span></p>
+
+<p class=MsoNormal>                let isGood = (role.camp !== 'wolf' ||
+target.roleKey === 'snow_wolf');</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+alert(`查驗結果：${isGood ? &quot;好人&quot; : &quot;狼人&quot;}`);</span></p>
+
+<p class=MsoNormal>            },</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>            // 女巫特殊介面</span></p>
+
+<p class=MsoNormal>            renderWitchUI: (container) =&gt; {</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+const deadId = gameState.actions.wolfKill; // 獲取狼刀</span></p>
+
+<p class=MsoNormal>                const info = document.createElement('div');</p>
+
+<p class=MsoNormal>                </p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 女巫能看到誰死</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+info.innerHTML = `&lt;p&gt;昨晚死亡玩家: ${deadId ? deadId + &quot;號&quot; : &quot;無人死亡&quot;}&lt;/p&gt;`;</span></p>
+
+<p class=MsoNormal>                info.style.marginBottom = &quot;20px&quot;;</p>
+
+<p class=MsoNormal>                </p>
+
+<p class=MsoNormal>                const btnSave = document.createElement('button');</p>
+
+<p class=MsoNormal>                btnSave.className =
+&quot;btn-secondary&quot;;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+btnSave.innerText = &quot;使用解藥&quot;;</span></p>
+
+<p class=MsoNormal>                btnSave.onclick = () =&gt; { </p>
+
+<p class=MsoNormal>                    gameState.actions.witchSave = true; </p>
+
+<p class=MsoNormal>                    btnSave.style.background =
+&quot;#4caf50&quot;; </p>
+
+<p class=MsoNormal>                };</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>                const btnPoison =
+document.createElement('div');</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+btnPoison.innerHTML = &quot;&lt;p&gt;使用毒藥 (點擊下方玩家):&lt;/p&gt;&quot;;</span></p>
+
+<p class=MsoNormal>                </p>
+
+<p class=MsoNormal>                container.appendChild(info);</p>
+
+<p class=MsoNormal>                if(deadId) container.appendChild(btnSave);</p>
+
+<p class=MsoNormal>                container.appendChild(btnPoison);</p>
+
+<p class=MsoNormal>                </p>
+
+<p class=MsoNormal>                gameEngine.renderPlayerGrid(container, (pid)
+=&gt; {</p>
+
+<p class=MsoNormal>                    gameState.actions.witchPoison = pid;</p>
+
+<p class=MsoNormal>                });</p>
+
+<p class=MsoNormal>            },</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>            // 天亮結算</span></p>
+
+<p class=MsoNormal>            resolveDay: () =&gt; {</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+document.getElementById('game-phase-title').innerText = &quot;天亮了&quot;;</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+document.getElementById('game-instruction').innerText = &quot;請主持人宣佈昨夜結果&quot;;</span></p>
+
+<p class=MsoNormal>               
+document.getElementById('game-action-area').innerHTML = &quot;&quot;;</p>
+
+<p class=MsoNormal>                </p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 1. 紀錄狼刀</span></p>
+
+<p class=MsoNormal>                if(gameEngine.tempSelection &amp;&amp; gameEngine.currentRole
+=== 'werewolf') {</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>                    
+// 最後一步通常不是狼，需從 actions 讀取，這裡簡化邏輯：</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>                    
+// 假設每一步 Next 之後都有把 tempSelection 存入 actions</span></p>
+
+<p class=MsoNormal>                }</p>
+
+<p class=MsoNormal>                </p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 這裡是一個簡化的結算邏輯</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 實際需在 nextStep 按下時，將 tempSelection 存入 gameState.actions[roleKey]</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 手動修正動作儲存 (為了MVP簡單化，放在這裡做個概念)</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 正常應在 nextStep 中 switch case 處理儲存</span></p>
+
+<p class=MsoNormal>                </p>
+
+<p class=MsoNormal>                let dead = [];</p>
+
+<p class=MsoNormal>                let wolfTarget = gameState.actions.werewolf;
+</p>
+
+<p class=MsoNormal>                let guardTarget = gameState.actions.guard;</p>
+
+<p class=MsoNormal>                let witchSave = gameState.actions.witchSave;</p>
+
+<p class=MsoNormal>                let witchPoison =
+gameState.actions.witchPoison;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 結算狼刀</span></p>
+
+<p class=MsoNormal>                if(wolfTarget) {</p>
+
+<p class=MsoNormal>                    if(wolfTarget !== guardTarget &amp;&amp;
+!witchSave) {</p>
+
+<p class=MsoNormal>                        dead.push(wolfTarget);</p>
+
+<p class=MsoNormal>                    }</p>
+
+<p class=MsoNormal>                    if(wolfTarget === guardTarget &amp;&amp;
+witchSave) {</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>                       
+// 奶穿 (同守同救)</span></p>
+
+<p class=MsoNormal>                        dead.push(wolfTarget); </p>
+
+<p class=MsoNormal>                    }</p>
+
+<p class=MsoNormal>                }</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 結算毒藥</span></p>
+
+<p class=MsoNormal>                if(witchPoison) dead.push(witchPoison);</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 去重</span></p>
+
+<p class=MsoNormal>                dead = [...new Set(dead)];</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 顯示結果</span></p>
+
+<p class=MsoNormal>                const resultDiv =
+document.createElement('div');</p>
+
+<p class=MsoNormal>                resultDiv.innerHTML = `</p>
+
+<p class=MsoNormal>                    &lt;h3 style=&quot;color:#ff5252;
+font-size:2rem;&quot;&gt;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>                       
+${dead.length &gt; 0 ? `昨夜死亡: ${dead.join(', ')}號` : &quot;昨夜是平安夜&quot;}</span></p>
+
+<p class=MsoNormal>                    &lt;/h3&gt;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>                   
+&lt;button class=&quot;btn-main&quot;
+onclick=&quot;app.startGameLoop()&quot;&gt;進入下一夜&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>                   
+&lt;p style=&quot;margin-top:20px; color:#888;&quot;&gt;(此版本為自動化演示，實際死亡需手動標記)&lt;/p&gt;</span></p>
+
+<p class=MsoNormal>                `;</p>
+
+<p class=MsoNormal>                document.getElementById('game-action-area').appendChild(resultDiv);</p>
+
+<p class=MsoNormal>            }</p>
+
+<p class=MsoNormal>        };</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>        // 攔截
+Next Step 按鈕，儲存動作</span></p>
+
+<p class=MsoNormal>        const originalNext = gameEngine.nextStep;</p>
+
+<p class=MsoNormal>        gameEngine.nextStep = () =&gt; {</p>
+
+<p class=MsoNormal>            if(gameEngine.currentRole &amp;&amp;
+gameEngine.tempSelection) {</p>
+
+<p class=MsoNormal><span style='font-family:"Arial Unicode MS"'>               
+// 儲存動作</span></p>
+
+<p class=MsoNormal>                if(gameEngine.currentRole === 'werewolf')
+gameState.actions.wolfKill = gameEngine.tempSelection;</p>
+
+<p class=MsoNormal>                if(gameEngine.currentRole === 'guard')
+gameState.actions.guard = gameEngine.tempSelection;</p>
+
+<p class=MsoNormal>                gameState.actions[gameEngine.currentRole] =
+gameEngine.tempSelection;</p>
+
+<p class=MsoNormal>            }</p>
+
+<p class=MsoNormal>            originalNext();</p>
+
+<p class=MsoNormal>        };</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>    &lt;/script&gt;</p>
+
+<p class=MsoNormal>&lt;/body&gt;</p>
+
+<p class=MsoNormal>&lt;/html&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+</div>
+
+</body>
+
+</html>
